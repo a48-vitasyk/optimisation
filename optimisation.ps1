@@ -51,6 +51,8 @@ do
 
 	38 - Optimisation at one click
 	39 - Check Update Status
+ 	40 - Pause
+
 
 	000 - Reboot PC
  	q - exit
