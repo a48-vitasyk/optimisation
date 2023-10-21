@@ -100,7 +100,7 @@ do
          	reg.exe ADD HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v EnableLUA /t REG_DWORD /d 0 /f;
      	} '5' {
          	'Disable UDP'
-         	reg add "HKLM\software\policies\microsoft\windows nt\Terminal Services\Client" /v fClientDisableUDP /d 1 /t REG_DWORD; pause; net stop TermService /y; net start TermService; exit
+         	reg add "HKLM\software\policies\microsoft\windows nt\Terminal Services\Client" /v fClientDisableUDP /d 1 /t REG_DWORD; pause; net stop TermService /y; net start TermService;
      	} '6' {
      		'Disable SmartScreen'
      		reg.exe ADD HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer /v SmartScreenEnabled /f /t REG_SZ /d "Off";
