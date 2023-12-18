@@ -304,16 +304,7 @@ Write-Host "Install 7-Zip in progress ..."
      		reg add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v TcpNumConnections /d 0 /t REG_DWORD;
      	} '38' {
      		'Optimisation at one click'
-     		reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v "PortNumber" /t REG_DWORD /d 55444 /f; netsh
-advfirewall firewall add rule name="RDP-Port" protocol=TCP localport=55444 action=allow dir=IN; reg.exe ADD HKLM\SOFTWARE\Microsoft\Windows
-\CurrentVersion\Policies\System /v EnableLUA /t REG_DWORD /d 0 /f; reg add "HKLM\software\policies\microsoft\windows nt\Terminal Services\Client" /v
-fClientDisableUDP /d 1 /t REG_DWORD; reg.exe ADD "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "PagingFiles" /t
-REG_MULTI_SZ /d "C:\pagefile.sys 2048 2048" /f; cmd /c "WMIC USERACCOUNT WHERE Name='Administrator' SET PasswordExpires=FALSE";
-If (-not (Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU")) {
-    New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" -Name "AU" -Force
-};
-
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoUpdate" -Value 1; pause; net stop TermService /y; net start TermService /y; exit;
+     		reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v "PortNumber" /t REG_DWORD /d 55444 /f; netsh advfirewall firewall add rule name="RDP-Port" protocol=TCP localport=55444 action=allow dir=IN; reg.exe ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "EnableLUA" /t REG_DWORD /d 0 /f; reg add "HKLM\software\policies\microsoft\windows nt\Terminal Services\Client" /v "fClientDisableUDP" /t REG_DWORD /d 1 /f; reg.exe ADD "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "PagingFiles" /t REG_MULTI_SZ /d "C:\pagefile.sys 2048 2048" /f; WMIC USERACCOUNT WHERE Name='Administrator' SET PasswordExpires=FALSE; PowerShell -Command "If (-not (Test-Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU')) {New-Item -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate' -Name 'AU' -Force}; Set-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU' -Name 'NoAutoUpdate' -Value 1"; net stop TermService; net start TermService;
      	} '39' {
      	'Check Update Status'
      		$autoUpdateValue = Get-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoUpdate" -ErrorAction SilentlyContinue
