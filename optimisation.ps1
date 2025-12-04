@@ -444,3 +444,5 @@ if (Test-Path $histPath) {
 			Where-Object { $_ -notmatch 'optimisation\.ps1' } |
 			Set-Content $histPath
 }
+
+exit
