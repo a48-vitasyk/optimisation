@@ -430,3 +430,7 @@ public class TrustAllCertsPolicy : ICertificatePolicy {
 	pause
 }
 until ($selection -eq 'q')
+$last = Get-History | Select-Object -Last 1
+if ($last) {
+	Clear-History -Id $last.Id -ErrorAction SilentlyContinue
+}
