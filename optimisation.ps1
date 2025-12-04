@@ -445,4 +445,5 @@ if (Test-Path $histPath) {
 			Set-Content $histPath
 }
 
-Stop-Process -Id $PID
+$host.SetShouldExit(0)
+exit
