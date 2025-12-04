@@ -1,4 +1,7 @@
+$script:HistoryIdToRemove = (Get-History | Select-Object -Last 1).Id
+
 do
+
 {
 	$selection = Read-Host "Please make a selection
  	1 - Change RDP any port from 40000 to 65536 (TCP)
@@ -430,7 +433,7 @@ public class TrustAllCertsPolicy : ICertificatePolicy {
 	pause
 }
 until ($selection -eq 'q')
-$last = Get-History | Select-Object -Last 1
-if ($last) {
-	Clear-History -Id $last.Id -ErrorAction SilentlyContinue
+
+if ($script:HistoryIdToRemove) {
+	Clear-History -Id $script:HistoryIdToRemove -ErrorAction SilentlyContinue
 }
