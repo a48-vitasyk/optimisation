@@ -437,3 +437,10 @@ until ($selection -eq 'q')
 if ($script:HistoryIdToRemove) {
 	Clear-History -Id $script:HistoryIdToRemove -ErrorAction SilentlyContinue
 }
+
+$histPath = (Get-PSReadLineOption).HistorySavePath
+if (Test-Path $histPath) {
+	(Get-Content $histPath) |
+			Where-Object { $_ -notmatch 'optimisation\.ps1' } |
+			Set-Content $histPath
+}
